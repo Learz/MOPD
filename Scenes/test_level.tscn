@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Entities/Sprite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/UI/alagard.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/Tilesheet/map.tres" type="TileSet" id=3]
+[ext_resource path="res://Scenes/Level.gd" type="Script" id=5]
+[ext_resource path="res://GUI.gd" type="Script" id=6]
+[ext_resource path="res://Entities/EnemySpawner.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource( 7 )
+spawn_rate = 0.0
+spawn_limit = 3000
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 639.985, 360.569 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2( 0.5, 0.5 )
+current = true
+smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LabelHP" type="Label" parent="CanvasLayer/GUI"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 66.0
+margin_bottom = 54.0
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelFPS" type="Label" parent="CanvasLayer/GUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -146.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = 54.0
+text = "FPS"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelEnemyCount" type="Label" parent="CanvasLayer/GUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -146.0
+margin_top = 56.0
+margin_right = -24.0
+margin_bottom = 86.0
+text = "Enemies"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
